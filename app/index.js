@@ -4,7 +4,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Navigator from './config/routes';
 
 EStyleSheet.build({
-  $primaryColor: '#FFFFFF'
+  $componentSpacing: 10,
+  $containerPadding: 15,
 });
 
 export default () => <Navigator />;
