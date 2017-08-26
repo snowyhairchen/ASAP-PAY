@@ -1,17 +1,20 @@
-import EStyleSheet from 'react-native-extended-stylesheet';
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export default EStyleSheet.create({
     input: {
-        marginVertical: '$componentSpacing',
+        marginVertical: "$componentSpacing"
     },
     button: {
-        justifyContent: 'center',
+        justifyContent: "center",
         flex: 1,
-        marginHorizontal: '$componentSpacing',
+        marginHorizontal: "$componentSpacing"
     },
     buttonContainer: {
         height: 45,
-        flexDirection: 'row',
-        marginTop: 20,
+        flexDirection: "row",
+        marginTop: 20
     },
+    container: {
+        backgroundColor: "$backgroundColor"
+    }
 });
