@@ -18,6 +18,7 @@ import {
     Input,
     Icon
 } from "native-base";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import gstyles from "../config/styles";
 import News from "./News";
@@ -36,11 +37,13 @@ class Main extends Component {
                 <Header noShadow searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input placeholder="搜尋" />
+                        <Input placeholder="搜尋店家" />
                     </Item>
-                    <Button transparent>
-                        <Text>Search</Text>
-                    </Button>
+                    <View style={styles.menuContainer}>
+                        <Button transparent>
+                            <Icon name="md-menu" />
+                        </Button>
+                    </View>
                 </Header>
                 <Tabs>
                     <Tab
@@ -70,7 +73,7 @@ class Main extends Component {
                     <Tab
                         heading={
                             <TabHeading>
-                                <Text>點數</Text>
+                                <Text>點數兌換</Text>
                             </TabHeading>
                         }>
                         <Points />
@@ -80,5 +83,11 @@ class Main extends Component {
         );
     }
 }
+
+const styles = EStyleSheet.create({
+    menuContainer: {
+        alignSelf: "flex-end"
+    }
+});
 
 export default Main;

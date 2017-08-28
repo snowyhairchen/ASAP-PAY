@@ -24,16 +24,16 @@ class News extends Component {
                                 source={require("../data/images/thumbnail.png")}
                             />
                             <Body>
-                                <Text>Cat</Text>
-                                <Text note>April 15, 2016</Text>
+                                <Text>店家名稱</Text>
+                                <Text note>發佈時間</Text>
                             </Body>
                         </Left>
                     </CardItem>
                     <CardItem>
-                        <Body>
+                        <Body style={styles.body}>
                             <Image
                                 source={require("../data/images/cat.jpg")}
-                                style={{ height: 200, width: 200, flex: 1 }}
+                                style={{ height: 200, width: 200 }}
                             />
                             <Text>優惠內容</Text>
                         </Body>
