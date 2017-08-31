@@ -15,9 +15,11 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 class News extends Component {
     render() {
-        return (
-            <Content>
-                <Card style={{ flex: 0 }}>
+        let news = [];
+
+        for (let i = 1; i <= 10; i++) {
+            news.push(
+                <Card key={i} style={{ flex: 0 }}>
                     <CardItem>
                         <Left>
                             <Thumbnail
@@ -39,13 +41,18 @@ class News extends Component {
                         </Body>
                     </CardItem>
                     <CardItem>
-                        <Button style={styles.button} bordered>
+                        <Button
+                            style={styles.button}
+                            bordered
+                            onPress={e => this.props.onPressReadMore(e, i)}>
                             <Text>繼續閱讀</Text>
                         </Button>
                     </CardItem>
                 </Card>
-            </Content>
-        );
+            );
+        }
+
+        return <Content>{news}</Content>;
     }
 }
 

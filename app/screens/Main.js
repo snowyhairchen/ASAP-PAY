@@ -1,22 +1,19 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import {
     Container,
     Header,
-    Content,
     Card,
-    CardItem,
-    Thumbnail,
     Text,
     Button,
-    Left,
-    Body,
     Tabs,
     Tab,
     TabHeading,
     Item,
     Input,
-    Icon
+    Icon,
+    Right,
+    Drawer
 } from "native-base";
 import EStyleSheet from "react-native-extended-stylesheet";
 
@@ -25,68 +22,92 @@ import News from "./News";
 import Map from "./Map";
 import Coupon from "./Coupon";
 import Points from "./Points";
+import SideBar from "./SideBar";
 
 class Main extends Component {
     constructor() {
         super();
     }
 
+    handlePressMenu = () => {
+        console.log("press menu");
+        this.drawer._root.open();
+    };
+
+    closeDrawer = () => {
+        this.drawer._root.close();
+    };
+
+    handlePressReadMore = (e, i) => {
+        console.log("press readmore");
+        this.props.navigation.navigate("NewsDetail");
+    };
+
     render() {
         return (
-            <Container>
-                <Header noShadow searchBar rounded>
-                    <Item>
-                        <Icon name="ios-search" />
-                        <Input placeholder="搜尋店家" />
-                    </Item>
-                    <View style={styles.menuContainer}>
-                        <Button transparent>
-                            <Icon name="md-menu" />
-                        </Button>
-                    </View>
-                </Header>
-                <Tabs>
-                    <Tab
-                        heading={
-                            <TabHeading>
-                                <Text>優惠消息</Text>
-                            </TabHeading>
-                        }>
-                        <News />
-                    </Tab>
-                    <Tab
-                        heading={
-                            <TabHeading>
-                                <Text>附近店家</Text>
-                            </TabHeading>
-                        }>
-                        <Map />
-                    </Tab>
-                    <Tab
-                        heading={
-                            <TabHeading>
-                                <Text>優惠卷</Text>
-                            </TabHeading>
-                        }>
-                        <Coupon />
-                    </Tab>
-                    <Tab
-                        heading={
-                            <TabHeading>
-                                <Text>點數兌換</Text>
-                            </TabHeading>
-                        }>
-                        <Points />
-                    </Tab>
-                </Tabs>
-            </Container>
+            <Drawer
+                ref={ref => {
+                    this.drawer = ref;
+                }}
+                content={<SideBar navigator={this.navigator} />}
+                onClose={() => this.closeDrawer()}
+                side="right">
+                <Container>
+                    <Header noShadow searchBar rounded>
+                        <Item>
+                            <Icon name="ios-search" />
+                            <Input placeholder="搜尋店家" />
+                        </Item>
+                        <Right style={styles.menuContainer}>
+                            <Button transparent onPress={this.handlePressMenu}>
+                                <Icon name="md-more" />
+                            </Button>
+                        </Right>
+                    </Header>
+                    <Tabs>
+                        <Tab
+                            heading={
+                                <TabHeading>
+                                    <Icon name="md-paper" />
+                                </TabHeading>
+                            }>
+                            <News onPressReadMore={this.handlePressReadMore} />
+                        </Tab>
+                        <Tab
+                            heading={
+                                <TabHeading>
+                                    <Icon name="md-map" />
+                                </TabHeading>
+                            }>
+                            <Map />
+                        </Tab>
+                        <Tab
+                            heading={
+                                <TabHeading>
+                                    <Text>優惠卷</Text>
+                                </TabHeading>
+                            }>
+                            <Coupon />
+                        </Tab>
+                        <Tab
+                            heading={
+                                <TabHeading>
+                                    <Text>點數兌換</Text>
+                                </TabHeading>
+                            }>
+                            <Points />
+                        </Tab>
+                    </Tabs>
+                </Container>
+            </Drawer>
         );
     }
 }
 
 const styles = EStyleSheet.create({
     menuContainer: {
-        alignSelf: "flex-end"
+        margin: 0,
+        flex: 0
     }
 });
 

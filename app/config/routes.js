@@ -4,6 +4,7 @@ import { StackNavigator } from "react-navigation";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Main from "../screens/Main";
+import NewsDetail from "../screens/NewsDetail";
 
 export default StackNavigator(
     {
@@ -23,6 +24,15 @@ export default StackNavigator(
             screen: Main,
             navigationOptions: {
                 header: () => null
+            }
+        },
+        NewsDetail: {
+            screen: NewsDetail,
+            navigationOptions: {
+                headerStyle: {
+                    backgroundColor: "#3F61B5"
+                },
+                headerTintColor: "#FFFFFF"
             }
         }
     },

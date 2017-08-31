@@ -29,7 +29,7 @@ class Login extends Component {
 
     handlePressRegister = () => {
         console.log("press register");
-        this.props.navigation.navigate("Register", { title: "註冊" });
+        this.props.navigation.navigate("Register");
     };
 
     handlePressLogin = () => {
