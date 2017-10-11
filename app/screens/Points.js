@@ -11,6 +11,7 @@ import {
     Button,
     Icon
 } from "native-base";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class Points extends Component {
     render() {
@@ -25,14 +26,14 @@ class Points extends Component {
                         source={require("../data/images/points.jpg")}
                     />
                     <Body>
-                        <Text>商品(10點)</Text>
+                        <Text>商品</Text>
                         <Text note>期限</Text>
                     </Body>
-                    <Right>
-                        <Button transparent>
-                            <Icon name="md-arrow-forward" />
+                    <View style={styles.buttonContainer}>
+                        <Button bordered small>
+                            <Text>10點</Text>
                         </Button>
-                    </Right>
+                    </View>
                 </ListItem>
             );
         }
@@ -44,5 +45,7 @@ class Points extends Component {
         );
     }
 }
+
+const styles = EStyleSheet.create({});
 
 export default Points;

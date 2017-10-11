@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { View } from "react-native";
 import {
     Content,
     List,
@@ -18,7 +19,7 @@ class Coupon extends Component {
 
         for (let i = 1; i <= 10; i++) {
             coupons.push(
-                <ListItem key={i}>
+                <ListItem style={styles.listItem} key={i}>
                     <Thumbnail
                         square
                         size={80}
@@ -28,11 +29,11 @@ class Coupon extends Component {
                         <Text>優惠卷標題</Text>
                         <Text note>優惠卷期限</Text>
                     </Body>
-                    <Right>
-                        <Button transparent>
-                            <Icon name="md-arrow-forward" />
+                    <View style={styles.buttonContainer}>
+                        <Button bordered small>
+                            <Text>兌換</Text>
                         </Button>
-                    </Right>
+                    </View>
                 </ListItem>
             );
         }
@@ -44,5 +45,7 @@ class Coupon extends Component {
         );
     }
 }
+
+const styles = EStyleSheet.create({});
 
 export default Coupon;

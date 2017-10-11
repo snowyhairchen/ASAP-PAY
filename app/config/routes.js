@@ -3,7 +3,7 @@ import { StackNavigator } from "react-navigation";
 
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import Main from "../screens/Main";
+import MainUser from "../screens/MainUser";
 import NewsDetail from "../screens/NewsDetail";
 
 export default StackNavigator(
@@ -20,8 +20,8 @@ export default StackNavigator(
                 header: () => null
             }
         },
-        Main: {
-            screen: Main,
+        MainUser: {
+            screen: MainUser,
             navigationOptions: {
                 header: () => null
             }

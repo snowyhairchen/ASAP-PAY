@@ -6,35 +6,31 @@ import {
     Container,
     Header,
     Content,
-    Item,
     Label,
     Input,
     Button,
     Text,
-    StyleProvider
+    Item
 } from "native-base";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 import { MText } from "../components/MText";
+import { RadioButton } from "../components/RadioButton";
 import gstyles from "../config/styles";
 
 class Login extends Component {
-    state = {
-        fontLoaded: false
-    };
-
     static propTypes = {
         navigation: PropTypes.object
     };
 
-    handlePressRegister = () => {
+    handlePressUserRegister = () => {
         console.log("press register");
         this.props.navigation.navigate("Register");
     };
 
     handlePressLogin = () => {
         console.log("press login");
-        this.props.navigation.navigate("Main");
+        this.props.navigation.navigate("MainUser");
     };
 
     render() {
@@ -55,13 +51,13 @@ class Login extends Component {
                         style={gstyles.button}
                         rounded
                         onPress={this.handlePressLogin}>
-                        <MText text="登入" />
+                        <MText>登入</MText>
                     </Button>
                     <Button
                         style={gstyles.button}
                         rounded
-                        onPress={this.handlePressRegister}>
-                        <MText text="註冊" />
+                        onPress={this.handlePressUserRegister}>
+                        <MText>註冊</MText>
                     </Button>
                 </View>
             </Container>

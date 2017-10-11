@@ -14,6 +14,15 @@ export default EStyleSheet.create({
         flexDirection: "row",
         marginTop: 20
     },
+    radioButtonLabel: {
+        marginRight: 15
+    },
+    radioButtonContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: "$componentSpacing",
+        marginHorizontal: "$containerPadding"
+    },
     container: {
         backgroundColor: "$backgroundColor"
     }
