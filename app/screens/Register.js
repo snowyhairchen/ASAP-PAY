@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import {
     Container,
     Header,
@@ -51,34 +51,42 @@ class Register extends Component {
         console.log("press Ok");
 
         if (this.state.password !== this.state.verifyPassword) {
-            alert("密碼不一致");
+            Alert.alert("", "密碼不一致");
             return;
         }
-
-        let sex = this.state.radioMale ? 0 : 1;
 
         fetch("http://192.168.1.101:8080/ASAPPayWebService/auth.php", {
             method: "POST",
             headers: {
-                Accept: "application/json",
+                Accept: "text/plain",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 user: this.state.user,
                 password: this.state.password,
                 email: this.state.email,
-                sex: sex,
+                sex: this.state.radioMale ? 0 : 1,
                 phone: this.state.phone,
                 school: this.state.school,
                 name: this.state.name
             })
         })
-            .then(response => console.log(response))
+            .then(response => response.json())
+            .then(responseJson => {
+                if (responseJson == "0") {
+                    Alert.alert("", "此帳號已註冊過");
+                } else {
+                    Alert.alert("", "註冊成功", [
+                        {
+                            text: "OK",
+                            onPress: () => this.props.navigation.goBack()
+                        }
+                    ]);
+                }
+            })
             .catch(error => {
                 console.error(error);
             });
-
-        this.props.navigation.goBack();
     };
 
     handlePressCancel = () => {
