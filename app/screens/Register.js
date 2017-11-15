@@ -22,7 +22,14 @@ class Register extends Component {
 
         this.state = {
             radioMale: true,
-            radioFemale: false
+            radioFemale: false,
+            user: "user",
+            password: "password",
+            verifyPassword: "password",
+            email: "user@domain.com",
+            phone: "0912345678",
+            school: "school",
+            name: "name"
         };
     }
 
@@ -42,6 +49,35 @@ class Register extends Component {
 
     handlePressOk = () => {
         console.log("press Ok");
+
+        if (this.state.password !== this.state.verifyPassword) {
+            alert("密碼不一致");
+            return;
+        }
+
+        let sex = this.state.radioMale ? 0 : 1;
+
+        fetch("http://192.168.1.101:8080/ASAPPayWebService/auth.php", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user: this.state.user,
+                password: this.state.password,
+                email: this.state.email,
+                sex: sex,
+                phone: this.state.phone,
+                school: this.state.school,
+                name: this.state.name
+            })
+        })
+            .then(response => console.log(response))
+            .catch(error => {
+                console.error(error);
+            });
+
         this.props.navigation.goBack();
     };
 
@@ -58,19 +94,37 @@ class Register extends Component {
                         <View>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>帳號</Label>
-                                <Input />
+                                <Input
+                                    onChangeText={user =>
+                                        this.setState({ user })}
+                                    value={this.state.user}
+                                />
                             </Item>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>密碼</Label>
-                                <Input secureTextEntry={true} />
+                                <Input
+                                    secureTextEntry={true}
+                                    onChangeText={password =>
+                                        this.setState({ password })}
+                                    value={this.state.password}
+                                />
                             </Item>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>確認密碼</Label>
-                                <Input secureTextEntry={true} />
+                                <Input
+                                    secureTextEntry={true}
+                                    onChangeText={verifyPassword =>
+                                        this.setState({ verifyPassword })}
+                                    value={this.state.verifyPassword}
+                                />
                             </Item>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>姓名</Label>
-                                <Input />
+                                <Input
+                                    onChangeText={name =>
+                                        this.setState({ name })}
+                                    value={this.state.name}
+                                />
                             </Item>
                             <View style={gstyles.radioButtonContainer}>
                                 <Label style={gstyles.radioButtonLabel}>
@@ -89,15 +143,29 @@ class Register extends Component {
                             </View>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>電話</Label>
-                                <Input keyboardType="numeric" />
+                                <Input
+                                    keyboardType="numeric"
+                                    onChangeText={phone =>
+                                        this.setState({ phone })}
+                                    value={this.state.phone}
+                                />
                             </Item>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>就讀學校</Label>
-                                <Input />
+                                <Input
+                                    onChangeText={school =>
+                                        this.setState({ school })}
+                                    value={this.state.school}
+                                />
                             </Item>
                             <Item style={gstyles.Input} inlineLabel>
                                 <Label>E-mail</Label>
-                                <Input keyboardType="email-address" />
+                                <Input
+                                    keyboardType="email-address"
+                                    onChangeText={email =>
+                                        this.setState({ email })}
+                                    value={this.state.email}
+                                />
                             </Item>
                         </View>
                         <View style={gstyles.buttonContainer}>
