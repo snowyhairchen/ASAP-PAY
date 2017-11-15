@@ -17,6 +17,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { MText } from "../components/MText";
 import { RadioButton } from "../components/RadioButton";
 import gstyles from "../config/styles";
+import { baseURL } from "../config/config";
 
 class Login extends Component {
     constructor() {
@@ -37,7 +38,7 @@ class Login extends Component {
     handlePressLogin = () => {
         console.log("press login");
 
-        fetch("http://192.168.1.101:8080/ASAPPayWebService/auth.php", {
+        fetch(baseURL + "/auth.php", {
             method: "POST",
             headers: {
                 Accept: "text/plain",

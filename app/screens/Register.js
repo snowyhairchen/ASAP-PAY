@@ -55,7 +55,7 @@ class Register extends Component {
             return;
         }
 
-        fetch("http://192.168.1.101:8080/ASAPPayWebService/auth.php", {
+        fetch(baseURL + "/auth.php", {
             method: "POST",
             headers: {
                 Accept: "text/plain",
