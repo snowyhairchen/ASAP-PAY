@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import {
     Form,
     Container,
@@ -19,6 +19,12 @@ import { RadioButton } from "../components/RadioButton";
 import gstyles from "../config/styles";
 
 class Login extends Component {
+    constructor() {
+        super();
+
+        this.state = { user: "user", password: "password" };
+    }
+
     static propTypes = {
         navigation: PropTypes.object
     };
@@ -30,7 +36,31 @@ class Login extends Component {
 
     handlePressLogin = () => {
         console.log("press login");
-        this.props.navigation.navigate("MainUser");
+
+        fetch("http://192.168.1.101:8080/ASAPPayWebService/auth.php", {
+            method: "POST",
+            headers: {
+                Accept: "text/plain",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user: this.state.user,
+                password: this.state.password
+            })
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                if (responseJson == "-1") {
+                    Alert.alert("", "無此帳號");
+                } else if (responseJson == "0") {
+                    Alert.alert("", "密碼錯誤");
+                } else {
+                    this.props.navigation.navigate("MainUser");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     render() {
@@ -39,11 +69,24 @@ class Login extends Component {
                 <Form>
                     <Item style={gstyles.input} inlineLabel>
                         <Label>帳號</Label>
-                        <Input />
+                        <Input
+                            onChangeText={user =>
+                                this.setState({
+                                    user
+                                })}
+                            value={this.state.user}
+                        />
                     </Item>
                     <Item style={gstyles.input} inlineLabel>
                         <Label>密碼</Label>
-                        <Input />
+                        <Input
+                            secureTextEntry={true}
+                            onChangeText={password =>
+                                this.setState({
+                                    password
+                                })}
+                            value={this.state.password}
+                        />
                     </Item>
                 </Form>
                 <View style={gstyles.buttonContainer}>
