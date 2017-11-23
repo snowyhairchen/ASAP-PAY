@@ -15,6 +15,7 @@ import EstyleSheet from "react-native-extended-stylesheet";
 
 import { RadioButton } from "../components/RadioButton";
 import gstyles from "../config/styles";
+import config from "../config/config";
 
 class Register extends Component {
     constructor() {
@@ -55,7 +56,7 @@ class Register extends Component {
             return;
         }
 
-        fetch(baseURL + "/auth.php", {
+        fetch(config.baseURL + "/auth.php", {
             method: "POST",
             headers: {
                 Accept: "text/plain",
