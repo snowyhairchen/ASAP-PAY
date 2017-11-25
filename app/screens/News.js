@@ -13,72 +13,95 @@ import {
 } from "native-base";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-import { baseURL}
+import config from "../config/config";
+import functionSet from "../config/function";
 
 class News extends Component {
     constructor() {
         super();
 
         let no, store_storeaccount, title, content, starttime, endtime;
+        let date = new Date();
+        let now =
+            date.getFullYear() +
+            "-" +
+            (date.getMonth() + 1) +
+            "-" +
+            date.getDate();
+        let url =
+            config["baseURL"] +
+            "/api.php/specialoffer?include=store&columns=No,Title,Content,StartTime,EndTime,store.StoreName&order=StartTime&filter=EndTime,ge," +
+            now;
+        console.log("request url:" + url);
         this.news = [];
 
-        fetch(
-            "http://192.168.1.101:8080/ASAPPayWebService/api.php/specialoffer",
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
+        fetch(url, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
             }
-        )
+        })
             .then(response => response.json())
             .then(responseJson => {
-                console.log(responseJson);
-                for (let i = 0; i < responseJson["columns"].length; i++) {
-                    switch (responseJson["columns"][i]) {
-                        case "No":
-                            no = i;
-                            break;
-                        case "Store_StoreAccount":
-                            store_storeaccount = i;
-                            break;
-                        case "Title":
-                            title = i;
-                            break;
-                        case "Content":
-                            content = i;
-                            break;
-                        case "StartTime":
-                            starttime = i;
-                            break;
-                        case "EndTime":
-                            endtime = i;
-                            break;
-                    }
-                }
+                responseFormat = functionSet["php_crud_api_transform"](
+                    responseJson
+                )["specialoffer"];
+                console.log(responseFormat);
 
-                for (let i = 0; i < responseJson["records"].length; i++) {
+                for (let i = 0; i < responseFormat.length; i++) {
+                    let imgURL =
+                        config["baseURL"] +
+                        "/images/stores/" +
+                        responseFormat[i]["Store_StoreAccount"];
+                    let content = "";
+
+                    if (responseFormat[i]["Content"].length > 100) {
+                        content =
+                            responseFormat[i]["Content"].substring(0, 100) +
+                            "...";
+                    } else {
+                        content = responseFormat[i]["Content"];
+                    }
+
                     this.news.push(
                         <Card key={i} style={{ flex: 0 }}>
                             <CardItem>
                                 <Left>
                                     <Thumbnail
-                                        source={{uri: }}
+                                        source={{
+                                            uri: imgURL + "/thumbnail.png"
+                                        }}
                                     />
                                     <Body>
-                                        <Text>店家名稱</Text>
-                                        <Text note>發佈時間</Text>
+                                        <Text>
+                                            {
+                                                responseFormat[i]["store"][0][
+                                                    "StoreName"
+                                                ]
+                                            }
+                                        </Text>
+                                        <Text note>
+                                            {responseFormat[i]["StartTime"]}~{
+                                                responseFormat[i]["EndTime"]
+                                            }
+                                        </Text>
                                     </Body>
                                 </Left>
                             </CardItem>
                             <CardItem>
                                 <Body style={styles.body}>
                                     <Image
-                                        source={require("../data/images/cat.jpg")}
+                                        source={{
+                                            uri:
+                                                imgURL +
+                                                "/specialoffer/" +
+                                                responseFormat[i]["No"] +
+                                                ".jpg"
+                                        }}
                                         style={{ height: 200, width: 200 }}
                                     />
-                                    <Text>優惠內容</Text>
+                                    <Text>{content}</Text>
                                 </Body>
                             </CardItem>
                             <CardItem>
@@ -86,7 +109,8 @@ class News extends Component {
                                     style={styles.button}
                                     bordered
                                     onPress={e =>
-                                        this.props.onPressReadMore(e, i)}>
+                                        this.props.onPressReadMore(e, i)
+                                    }>
                                     <Text>繼續閱讀</Text>
                                 </Button>
                             </CardItem>
@@ -97,10 +121,12 @@ class News extends Component {
             .catch(error => {
                 console.error(error);
             });
+
+        console.log(this.news);
     }
 
     render() {
-        return <Content>{news}</Content>;
+        return <Content>{this.news}</Content>;
     }
 }
 
