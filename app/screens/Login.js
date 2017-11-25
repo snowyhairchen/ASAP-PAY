@@ -38,7 +38,7 @@ class Login extends Component {
     handlePressLogin = () => {
         console.log("press login");
 
-        fetch(config.baseURL + "/auth.php", {
+        fetch(config["baseURL"] + "/auth.php", {
             method: "POST",
             headers: {
                 Accept: "text/plain",
@@ -74,7 +74,8 @@ class Login extends Component {
                             onChangeText={user =>
                                 this.setState({
                                     user
-                                })}
+                                })
+                            }
                             value={this.state.user}
                         />
                     </Item>
@@ -85,7 +86,8 @@ class Login extends Component {
                             onChangeText={password =>
                                 this.setState({
                                     password
-                                })}
+                                })
+                            }
                             value={this.state.password}
                         />
                     </Item>
