@@ -25,5 +25,8 @@ export default EStyleSheet.create({
     },
     container: {
         backgroundColor: "$backgroundColor"
+    },
+    storeHeader: {
+        flexDirection: "row"
     }
 });

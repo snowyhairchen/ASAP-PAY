@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import {
     Content,
     Card,
@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import EStyleSheet from "react-native-extended-stylesheet";
 
+import gstyles from "../config/styles";
 import config from "../config/config";
 import functionSet from "../config/function";
 
@@ -72,7 +73,14 @@ class News extends Component {
                     news.push(
                         <Card key={i} style={{ flex: 0 }}>
                             <CardItem>
-                                <Left>
+                                <TouchableOpacity
+                                    style={gstyles.storeHeader}
+                                    onPress={e =>
+                                        this.props.onPressStore(
+                                            e,
+                                            responseFormat[i]["store"]
+                                        )
+                                    }>
                                     <Thumbnail
                                         source={{
                                             uri: imgURL + "/thumbnail.png"
@@ -92,7 +100,7 @@ class News extends Component {
                                             }
                                         </Text>
                                     </Body>
-                                </Left>
+                                </TouchableOpacity>
                             </CardItem>
                             <CardItem>
                                 <Body style={styles.body}>

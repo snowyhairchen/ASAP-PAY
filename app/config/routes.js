@@ -5,6 +5,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import MainUser from "../screens/MainUser";
 import NewsDetail from "../screens/NewsDetail";
+import StoreDetail from "../screens/StoreDetail";
 
 export default StackNavigator(
     {
@@ -28,6 +29,15 @@ export default StackNavigator(
         },
         NewsDetail: {
             screen: NewsDetail,
+            navigationOptions: {
+                headerStyle: {
+                    backgroundColor: "#3F61B5"
+                },
+                headerTintColor: "#FFFFFF"
+            }
+        },
+        StoreDetail: {
+            screen: StoreDetail,
             navigationOptions: {
                 headerStyle: {
                     backgroundColor: "#3F61B5"

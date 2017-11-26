@@ -38,9 +38,14 @@ class MainUser extends Component {
         this.drawer._root.close();
     };
 
-    handlePressReadMore = (e, i, storeData) => {
+    handlePressReadMore = (e, i, specialofferData) => {
         console.log("press readmore");
-        this.props.navigation.navigate("NewsDetail", { storeData });
+        this.props.navigation.navigate("NewsDetail", { specialofferData });
+    };
+
+    handlePressStore = (e, storeData) => {
+        console.log("press store");
+        this.props.navigation.navigate("StoreDetail", { storeData });
     };
 
     render() {
@@ -71,7 +76,10 @@ class MainUser extends Component {
                                     <Icon name="md-paper" />
                                 </TabHeading>
                             }>
-                            <News onPressReadMore={this.handlePressReadMore} />
+                            <News
+                                onPressReadMore={this.handlePressReadMore}
+                                onPressStore={this.handlePressStore}
+                            />
                         </Tab>
                         <Tab
                             heading={

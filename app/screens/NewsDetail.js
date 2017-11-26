@@ -14,11 +14,12 @@ class NewsDetail extends Component {
     }
 
     render() {
-        let storeData = this.props.navigation.state.params.storeData;
+        let specialofferData = this.props.navigation.state.params
+            .specialofferData;
         let imgURL =
             config["baseURL"] +
             "/images/stores/" +
-            storeData["Store_StoreAccount"];
+            specialofferData["Store_StoreAccount"];
         console.log(imgURL);
 
         return (
@@ -29,9 +30,13 @@ class NewsDetail extends Component {
                             source={{ uri: imgURL + "/thumbnail.png" }}
                         />
                         <View>
-                            <Text>{storeData["store"][0]["StoreName"]}</Text>
+                            <Text>
+                                {specialofferData["store"][0]["StoreName"]}
+                            </Text>
                             <Text note>
-                                {storeData["StartTime"]}~{storeData["EndTime"]}
+                                {specialofferData["StartTime"]}~{
+                                    specialofferData["EndTime"]
+                                }
                             </Text>
                         </View>
                     </View>
@@ -40,12 +45,12 @@ class NewsDetail extends Component {
                             uri:
                                 imgURL +
                                 "/specialoffer/" +
-                                storeData["No"] +
+                                specialofferData["No"] +
                                 ".jpg"
                         }}
                         style={{ height: 200, width: 200 }}
                     />
-                    <Text>{storeData["Content"]}</Text>
+                    <Text>{specialofferData["Content"]}</Text>
                 </Content>
             </Container>
         );
