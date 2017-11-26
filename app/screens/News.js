@@ -78,7 +78,7 @@ class News extends Component {
                                     onPress={e =>
                                         this.props.onPressStore(
                                             e,
-                                            responseFormat[i]["store"]
+                                            responseFormat[i]["store"][0]
                                         )
                                     }>
                                     <Thumbnail
