@@ -132,6 +132,8 @@ class News extends Component {
             .catch(error => {
                 console.error(error);
             });
+
+        console.log(this.news);
     }
 
     render() {
