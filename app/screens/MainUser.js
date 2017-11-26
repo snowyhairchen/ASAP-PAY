@@ -38,9 +38,9 @@ class MainUser extends Component {
         this.drawer._root.close();
     };
 
-    handlePressReadMore = (e, i) => {
+    handlePressReadMore = (e, i, storeData) => {
         console.log("press readmore");
-        this.props.navigation.navigate("NewsDetail");
+        this.props.navigation.navigate("NewsDetail", { storeData });
     };
 
     render() {

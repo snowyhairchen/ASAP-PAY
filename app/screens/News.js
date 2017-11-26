@@ -114,7 +114,11 @@ class News extends Component {
                                     style={styles.button}
                                     bordered
                                     onPress={e =>
-                                        this.props.onPressReadMore(e, i)
+                                        this.props.onPressReadMore(
+                                            e,
+                                            i,
+                                            responseFormat[i]
+                                        )
                                     }>
                                     <Text>繼續閱讀</Text>
                                 </Button>

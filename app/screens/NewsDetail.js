@@ -4,28 +4,48 @@ import { Container, Content, Thumbnail, Text, Left, Body } from "native-base";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 import gstyles from "../config/styles";
+import config from "../config/config";
 
 const platform = Platform.OS;
 
 class NewsDetail extends Component {
+    constructor() {
+        super();
+    }
+
     render() {
+        let storeData = this.props.navigation.state.params.storeData;
+        let imgURL =
+            config["baseURL"] +
+            "/images/stores/" +
+            storeData["Store_StoreAccount"];
+        console.log(imgURL);
+
         return (
             <Container style={gstyles.container}>
                 <Content style={styles.content}>
                     <View style={styles.newsHeader}>
                         <Thumbnail
-                            source={require("../data/images/thumbnail.png")}
+                            source={{ uri: imgURL + "/thumbnail.png" }}
                         />
                         <View>
-                            <Text>店家名稱</Text>
-                            <Text note>發佈時間</Text>
+                            <Text>{storeData["store"][0]["StoreName"]}</Text>
+                            <Text note>
+                                {storeData["StartTime"]}~{storeData["EndTime"]}
+                            </Text>
                         </View>
                     </View>
                     <Image
-                        source={require("../data/images/cat.jpg")}
+                        source={{
+                            uri:
+                                imgURL +
+                                "/specialoffer/" +
+                                storeData["No"] +
+                                ".jpg"
+                        }}
                         style={{ height: 200, width: 200 }}
                     />
-                    <Text>優惠內容</Text>
+                    <Text>{storeData["Content"]}</Text>
                 </Content>
             </Container>
         );
