@@ -5,6 +5,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Swiper from "react-native-swiper";
 
 import config from "../config/config";
+import { ScaledImage } from "../components/ScaledImage";
 
 class StoreDetail extends Component {
     render() {
@@ -23,25 +24,13 @@ class StoreDetail extends Component {
                         paginationStyle={styles.pagination}
                         showsButtons={true}>
                         <View style={styles.slide}>
-                            <Image
-                                style={styles.img}
-                                source={{ uri: imgURL + "/0.jpg" }}
-                                resizeMode="contain"
-                            />
+                            <ScaledImage uri={imgURL + "/0.jpg"} height={200} />
                         </View>
                         <View style={styles.slide}>
-                            <Image
-                                style={styles.img}
-                                source={{ uri: imgURL + "/1.jpg" }}
-                                resizeMode="contain"
-                            />
+                            <ScaledImage uri={imgURL + "/1.jpg"} height={200} />
                         </View>
                         <View style={styles.slide}>
-                            <Image
-                                style={styles.img}
-                                source={{ uri: imgURL + "/2.jpg" }}
-                                resizeMode="contain"
-                            />
+                            <ScaledImage uri={imgURL + "/2.jpg"} height={200} />
                         </View>
                     </Swiper>
                 </Content>
@@ -60,9 +49,6 @@ const styles = EStyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
-    },
-    img: {
-        flex: 1
     }
 });
 
