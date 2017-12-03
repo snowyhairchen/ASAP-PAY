@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import {
     Content,
     Card,
@@ -35,7 +35,7 @@ class News extends Component {
             date.getDate();
         let url =
             config["baseURL"] +
-            "/api.php/specialoffer?include=store&columns=No,Title,Content,StartTime,EndTime,store.StoreName&order=StartTime&filter=EndTime,ge," +
+            "/api.php/specialoffer?include=store,storecategory&columns=No,Title,Content,StartTime,EndTime,store.StoreName,store.Phone,store.Address,store.StoreDescription,store.StoreCategory_CategoryNo,store.Rate,store.reviewAmount,store.keepstoreAmount,storecategory.Name&order=StartTime&filter=EndTime,ge," +
             now;
         console.log("request url:" + url);
 
@@ -86,7 +86,7 @@ class News extends Component {
                                             uri: imgURL + "/thumbnail.png"
                                         }}
                                     />
-                                    <Body>
+                                    <View style={gstyles.storeHeaderText}>
                                         <Text>
                                             {
                                                 responseFormat[i]["store"][0][
@@ -99,7 +99,7 @@ class News extends Component {
                                                 responseFormat[i]["EndTime"]
                                             }
                                         </Text>
-                                    </Body>
+                                    </View>
                                 </TouchableOpacity>
                             </CardItem>
                             <CardItem>

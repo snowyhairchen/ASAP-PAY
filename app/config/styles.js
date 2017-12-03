@@ -28,5 +28,8 @@ export default EStyleSheet.create({
     },
     storeHeader: {
         flexDirection: "row"
+    },
+    storeHeaderText: {
+        justifyContent: "center"
     }
 });

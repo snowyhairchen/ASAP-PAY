@@ -23,7 +23,7 @@ class Coupon extends Component {
                     <Thumbnail
                         square
                         size={80}
-                        source={require("../data/images/couponImg.png")}
+                        source={require("../data/images/couponImg.jpg")}
                     />
                     <Body>
                         <Text>優惠卷標題</Text>

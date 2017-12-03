@@ -57,7 +57,7 @@ class MainUser extends Component {
                 content={<SideBar navigator={this.navigator} />}
                 onClose={() => this.closeDrawer()}
                 side="right">
-                <Container>
+                <Container style={gstyles.container}>
                     <Header noShadow searchBar rounded>
                         <Item>
                             <Icon name="ios-search" />
