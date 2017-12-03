@@ -35,7 +35,7 @@ class News extends Component {
             date.getDate();
         let url =
             config["baseURL"] +
-            "/api.php/specialoffer?include=store,storecategory&columns=No,Title,Content,StartTime,EndTime,store.StoreName,store.Phone,store.Address,store.StoreDescription,store.StoreCategory_CategoryNo,store.Rate,store.reviewAmount,store.keepstoreAmount,storecategory.Name&order=StartTime&filter=EndTime,ge," +
+            "/api.php/specialoffer?include=store,storecategory&columns=No,Title,Content,StartTime,EndTime,store.StoreName,store.Phone,store.Address,store.StoreDescription,store.StoreCategory_CategoryNo,store.Rate,store.reviewAmount,store.keepstoreAmount,store.imageAmount,storecategory.Name&order=StartTime&filter=EndTime,ge," +
             now;
         console.log("request url:" + url);
 
